@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+ <pluginsListing>
+  <plugin>
+    <name>Showmap</name>
+    <author>Pwar</author>
+    <description>This gives you links to external map sites. Highly recommended.</description>
+    <id>63882d1089f727f5f94c3f41</id>
+    <download>https://raw.githubusercontent.com/hudmond/hudmond.github.io/master/Aardwolf_Showmap_v1.0.5.zip</download>
+    <installpath>0</installpath>
+  </plugin>
+
+  <plugin>
+    <name>Soundpack</name>
+    <author>Pwar</author>
+    <id>23832d1089f727f5f34abad8</id>
+    <description>Highly configurable soundpack plugin.</description>
+    <download>https://raw.githubusercontent.com/hudmond/hudmond.github.io/master/Aardwolf_Soundpack_v1.1.2.zip</download>
+    <installpath>1</installpath>
+  </plugin>
+
+  <plugin>
+    <name>mudbin</name>
+    <author>Pwar</author>
+    <id>04d9e64f834452b145b459b7</id>
+    <description>This lets you copy anything from the main output window, press Ctrl+P, and it will post the contents to http://mudbin.tk/ with the color codes intact, and copy the link to your clipboard for sharing with others.</description>
+    <download>https://raw.githubusercontent.com/hudmond/hudmond.github.io/master/Aardwolf_mudbin_v1.0.0.zip</download>
+    <installpath>0</installpath>
+  </plugin>
+
+  <plugin>
+    <name>WinkleGold - Search &amp; Destroy</name>
+    <author>Pwar</author>
+    <id>b6eae87ccedd84f510b74715</id>
+    <id>e50b1d08a0cfc0ee9c442001</id>
+    <id>3f498d929793c12cb70f5999</id>
+    <description>Enhanced version of WinkleWinkle's Search &amp; Destroy script.</description>
+    <download>https://raw.githubusercontent.com/hudmond/ppm/master/wg-latest.zip</download>
+    <installpath>0</installpath>
+  </plugin>
+
+ </pluginsListing>
