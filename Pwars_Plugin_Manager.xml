@@ -10,7 +10,7 @@
    purpose="Manages updates for Pwar's plugins"
    date_written="2017-12-21 01:08:25"
    requires="4.76"
-   version="1.0"
+   version="1.1"
    save_state="y"
    >
 <description trim="y">
@@ -282,11 +282,10 @@ function async_plugin_download_complete(retval, page, status, headers, full_stat
          
          if fileExt == ".xml" then
             xmlFile.filename = file.filename
-            xmlFile.pluginid = string.match(currFileContents, '%s%s+id="(.-)"')
-            --local version = tonumber(string.match(page, '%s%s+version="([0-9%.]+)"'))
-            
+            --print(xmlFile.filename)
+            xmlFile.pluginid = string.match(currFileContents, '%s%s+id="(.-)"')            
             table.insert(xmlFiles, xmlFile)
-            --table.insert(xmlFiles, file.filename)
+            xmlFile = {}
          end
          
          currFile:close()
