@@ -10,7 +10,7 @@
    purpose="Manages updates for Pwar's plugins"
    date_written="2017-12-21 01:08:25"
    requires="4.76"
-   version="1.1"
+   version="1.2"
    save_state="y"
    >
 <description trim="y">
@@ -105,17 +105,21 @@ local async = require "async"
 local last_update
 require "zip"
 local installedPlugins = {}
+local lastListHash
 local currentPlugin = {}
 local pluginList = {}
 local updatePlugin = {}
 local pListNum = 0
+local pluginListUrl = "https://raw.githubusercontent.com/hudmond/ppm/master/ppm.xml"
+local lastPluginList
 
 
 function ppm_main(name, line, wc)
    --printmsg("Okay listing Pwar's plugins..")
    printmsg("*** Requesting plugin/update list from server.. Please wait.\r\n\r\n")
-   local url = "https://raw.githubusercontent.com/hudmond/ppm/master/ppm.xml"
-   async.doAsyncRemoteRequest(url, async_xml_download_complete, "HTTPS", 120)
+   async.HEAD(pluginListUrl, async_head_plist, "HTTPS", 120)
+   --local url = "https://raw.githubusercontent.com/hudmond/ppm/master/ppm.xml"
+   --async.doAsyncRemoteRequest(url, async_xml_download_complete, "HTTPS", 120)
 end
 
 function ppm_install(name, line, wc)
@@ -165,6 +169,17 @@ function ppm_help(name, line, wc)
 	print("")
 	ColourNote("SteelBlue", "", GetPluginInfo (GetPluginID (), 3))
 	print("")
+end
+
+function async_head_plist(retval, page, status, headers, full_status, request_url)
+   if (lastListHash ~= nil and lastListHash ~= headers["etag"]) or lastPluginList == nil then
+      print("No list hash yet or different one, storing " .. headers["etag"] .. " and beginning download")
+      async.doAsyncRemoteRequest(pluginListUrl, async_xml_download_complete, "HTTPS", 120)
+   else
+      for p = 1, #lastPluginList do
+         get_plugin_info(lastPluginList[p])
+      end
+   end
 end
 
 function async_head_plugin(retval, page, status, headers, full_status, request_url)
@@ -324,6 +339,8 @@ function async_xml_download_complete(retval, page, status, headers, full_status,
    if status == 200 then
       --print(page)
       --print(status)
+      lastListHash = headers["etag"]
+      SaveState()
       local xml = utils.xmlread(page)
       local num_plugins = #xml.nodes [2].nodes
       --print(num_plugins)
@@ -354,6 +371,8 @@ function async_xml_download_complete(retval, page, status, headers, full_status,
             end
          end
       end
+      lastPluginList = pluginList
+      SaveState()
       for p = 1, #pluginList do
          get_plugin_info(pluginList[p])
       end
@@ -404,15 +423,26 @@ print("")
 
 function OnPluginInstall()
    local installedStr = GetVariable("installedPlugins")
+   local lastListStr = GetVariable("lastPluginList")
 	if installedStr ~= nil then
 		installedPlugins = load( "return "..installedStr)( ) 
 	end
+   if lastListStr ~= nil then
+		lastPluginList = load( "return "..lastListStr)( ) 
+	end
+   lastListHash = GetVariable("installedPlugins")
 end
 
 function OnPluginSaveState()
 		-- this will run when SaveState() is called or if mush is closing etc
    if installedPlugins ~= nil then
       SetVariable("installedPlugins", serialize.save_simple(installedPlugins))
+   end
+   if lastListHash ~= nil then
+      SetVariable("lastListHash", lastListHash)
+   end
+   if lastPluginList ~= nil then
+      SetVariable("lastPluginList", serialize.save_simple(lastPluginList))
    end
 end
 
