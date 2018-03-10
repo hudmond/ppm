@@ -22,7 +22,7 @@
 
    requires="4.76"
 
-   version="1.2"
+   version="1.3"
 
    save_state="y"
 
@@ -31,51 +31,26 @@
 <description trim="y">
 
 <![CDATA[
-
-
-
 >    ppm
-
         - display summary of all plugins
 
-
-
 >    ppm install [number]
-
         - downloads and installs/updates the plugin
-
-
-
+        
 >    ppm update
-
         - checks for update for ppm itself
 
-
-
 >    ppm update [number]
-
         - this functions the same as "ppm install"
 
-
-
 >    ppm reload [number]
-
         - reloads all xml files related to the plugin
 
-        
-
 >    ppm reset
-
         - resets all retained information about previous updates
 
-	
-
 >    ppm help
-
         - displays this help file :)
-
-        
-
 ]]>
 
 </description>
@@ -354,9 +329,23 @@ function async_head_plist(retval, page, status, headers, full_status, request_ur
 
    else
 
-      for p = 1, #lastPluginList do
 
-         get_plugin_info(lastPluginList[p])
+      for p = 1, #lastPluginList do
+         local thisPlugin = lastPluginList[p]
+         thisPlugin.installed = true
+
+         for i = 1, #thisPlugin.ids do
+
+            if not (IsPluginInstalled(thisPlugin.ids[i]) and GetPluginInfo(thisPlugin.ids[i], 17)) then
+
+               thisPlugin.installed = false
+
+               --print("Plugin not installed and enabled!!" .. thisPlugin.ids[i])
+
+            end
+
+         end
+         get_plugin_info(thisPlugin)
 
       end
 
@@ -728,7 +717,7 @@ function async_xml_download_complete(retval, page, status, headers, full_status,
 
          pluginList[p] = thisPlugin
 
-         thisPlugin.installed = true
+         thisPlugin.installed = truete
 
          for i = 1, #thisPlugin.ids do
 
