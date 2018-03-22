@@ -37,5 +37,16 @@
     <download>https://raw.githubusercontent.com/hudmond/ppm/master/misc/wg-latest.zip</download>
     <installpath>0</installpath>
   </plugin>
+  
+    <plugin>
+    <name>Inviter</name>
+    <author>Pwar</author>
+    <id>b6eae87ccedd84f510b74715</id>
+    <id>e50b1d08a0cfc0ee9c442001</id>
+    <id>3f498d929793c12cb70f5999</id>
+    <description>Lets you add friends/clan members to a list to auto-invite them to party when they login. Also lets group members use commands via tell/group messages to invite themselves or others.</description>
+    <download>https://raw.githubusercontent.com/hudmond/ppm/master/misc/inviter-latest.zip</download>
+    <installpath>0</installpath>
+  </plugin>
 
  </pluginsListing>
