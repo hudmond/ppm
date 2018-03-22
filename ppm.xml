@@ -46,5 +46,7 @@
     <download>https://raw.githubusercontent.com/hudmond/ppm/master/misc/inviter-latest.zip</download>
     <installpath>0</installpath>
   </plugin>
+<test>
+</test>
 
  </pluginsListing>
