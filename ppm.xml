@@ -38,11 +38,11 @@
     <installpath>0</installpath>
   </plugin>
   
-    <plugin>
-    <name>Inviter</name>
+  <plugin>
+    <name>Test Entry</name>
     <author>Pwar</author>
     <id>56e7e7121bf320c3510ee2e0</id>
-    <description>Lets you add friends/clan members to a list to auto-invite them to party when they login. Also lets group members use commands via tell/group messages to invite themselves or others.</description>
+    <description>Test entry--please ignore</description>
     <download>https://raw.githubusercontent.com/hudmond/ppm/master/misc/inviter-latest.zip</download>
     <installpath>0</installpath>
   </plugin>

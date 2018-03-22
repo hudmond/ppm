@@ -22,7 +22,7 @@
 
    requires="4.76"
 
-   version="1.31"
+   version="1.32"
 
    save_state="y"
 
@@ -207,15 +207,9 @@ local lastPluginList
 
 function ppm_main(name, line, wc)
 
-   --printmsg("Okay listing Pwar's plugins..")
-
    printmsg("*** Requesting plugin/update list from server.. Please wait.\r\n\r\n")
 
    async.HEAD(pluginListUrl, async_head_plist, "HTTPS", 120)
-
-   --local url = "https://raw.githubusercontent.com/hudmond/ppm/master/ppm.xml"
-
-   --async.doAsyncRemoteRequest(url, async_xml_download_complete, "HTTPS", 120)
 
 end
 
@@ -469,9 +463,13 @@ function async_head_plugin(retval, page, status, headers, full_status, request_u
          end
 
       end
-
+      
+      ColourTell("LightSkyBlue", "", "** Pwar write plugins for fun, and to share with others.\r\n** If you find them useful and would like to donate, I do accept paypals at: ")
+      
+      Hyperlink("http://paypal.me/hudmond", "http://paypal.me/hudmond", "Click to donate via paypal", "yellowgreen", "", 1)
+      
+      print("")
       --printmsg("End of plugin list, " .. #pluginList .. " plugins indexed.")
-
    end
 
 end
@@ -485,7 +483,7 @@ function async_ppm_download_complete(retval, page, status, headers, full_status,
     local version = tonumber(string.match(page, '%s%s+version="([0-9%.]+)"'))
 
     local installedVer = GetPluginInfo(GetPluginID(), 19)
-
+   
     if version > installedVer then
 
       printmsg("Updating from version " .. installedVer .. " to version " .. version)
@@ -718,7 +716,7 @@ function async_xml_download_complete(retval, page, status, headers, full_status,
 
          pluginList[p] = thisPlugin
 
-         thisPlugin.installed = truete
+         thisPlugin.installed = true
 
          for i = 1, #thisPlugin.ids do
 
