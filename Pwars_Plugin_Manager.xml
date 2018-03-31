@@ -258,7 +258,6 @@ function async_ppm_download_complete(retval, page, status, headers, full_status,
       printmsg("Updating from version " .. installedVer .. " to version " .. version)
       local file = io.open(GetPluginInfo(GetPluginID(), 6), "w")
       page = string.gsub(page, "\r", "")
-      print(page)
       file:write(page)
       file:close()
       if GetAlphaOption("script_prefix") == "" then SetAlphaOption("script_prefix", "\\\\\\") end
