@@ -39,6 +39,15 @@
   </plugin>
   
   <plugin>
+    <name>WinkleGold - Spellup</name>
+    <author>Pwar</author>
+    <id>e50b1d08a0cfc0ee9c442002</id>
+    <description>Enhanced version of WinkleWinkle's Spellup script. This fixes saving of SetClanSn and recasting of some spells/skills. It is a work in progress, feel free to send Pwar notes requesting specific spells/skills that aren't being recasted by the plugin and I will try to fix them.</description>
+    <download>https://raw.githubusercontent.com/hudmond/ppm/master/misc/su-latest.zip</download>
+    <installpath>0</installpath>
+  </plugin>
+  
+  <plugin>
     <name>Inviter</name>
     <author>Pwar</author>
     <id>56e7e7121bf320c3510ee2e0</id>
